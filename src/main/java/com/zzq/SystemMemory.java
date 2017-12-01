@@ -88,6 +88,9 @@ public class SystemMemory {
                     System.out.println("加载系统常量：SystemMemory."+fieldName+" = "+fieldValue);
                 }
             }
+            //特殊处理，表名称转大写
+            SystemMemory.tableName = SystemMemory.tableName.toUpperCase();
+
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {

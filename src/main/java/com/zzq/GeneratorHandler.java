@@ -7,6 +7,7 @@ import org.apache.commons.dbutils.DbUtils;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Created by yhsyzzq on 2017-11-29.
@@ -43,6 +44,7 @@ public class GeneratorHandler {
 
         //初始化数据库表信息
         initJdbcInfo();
+
     }
 
     /**
@@ -59,16 +61,24 @@ public class GeneratorHandler {
      * 获取数据库表信息放入内存
      */
     public void initJdbcInfo() {
+        //初始化未找到指定表
+        boolean hasFindTable = false;
         //加载数据表信息
         Connection conn = null;
         try {
             Class.forName(SystemMemory.jdbcDriver);
-            conn = DriverManager.getConnection(SystemMemory.jdbcUrl, SystemMemory.jdbcUserName, SystemMemory.jdbcPassword);
+
+            Properties props =new Properties();
+            props.put("user",SystemMemory.jdbcUserName);
+            props.put("password",SystemMemory.jdbcPassword);
+            props.put("remarksReporting","true"); //oracle允许获取字段注释
+
+            conn = DriverManager.getConnection(SystemMemory.jdbcUrl, props);
             DatabaseMetaData dbMetaData = conn.getMetaData();
             String schemaPattern = dbMetaData.getUserName().toUpperCase(); //数据库schema
-            ResultSet tableRS = dbMetaData.getTables(null, schemaPattern, "", new String[]{"TABLE"});
+            ResultSet tableRS = dbMetaData.getTables(null, schemaPattern, "%", new String[]{"TABLE"});
             while (tableRS.next()) {
-                String tableName = tableRS.getString("TABLE_NAME"); //表名
+                String tableName = tableRS.getString("TABLE_NAME").toUpperCase(); //表名
                 if (tableName.equals(SystemMemory.tableName)) {
                     String tableRemark = tableRS.getString("REMARKS");   //表注释
                     Table table = new Table();
@@ -76,7 +86,7 @@ public class GeneratorHandler {
                     table.setRemark(tableRemark);
 
                     //获取列信息
-                    ResultSet columnRS = dbMetaData.getColumns(null, schemaPattern, tableName, "");
+                    ResultSet columnRS = dbMetaData.getColumns(null, schemaPattern, tableName, "%");
                     while (columnRS.next()) {
                         String columnName = columnRS.getString("COLUMN_NAME"); //列名称
                         String typeName = columnRS.getString("TYPE_NAME"); //列数据类型
@@ -96,6 +106,7 @@ public class GeneratorHandler {
                         System.out.println("列名称:" + columnName + ", 列数据类型:" + typeName + ", 对应实体属性名称:" + entityFieldName + ", 对应实体属性类型:" + entityFieldType + ", 对应实体属性类型(不带包名):" + simpleEntityFieldType + ", 列jdbc类型:" + jdbcType + ", 列注释：" + remark);
                         SystemMemory.columnList.add(column);
                     }
+                    hasFindTable = true; //已找到指定表
                 }
             }
         } catch (ClassNotFoundException e) {
@@ -104,6 +115,10 @@ public class GeneratorHandler {
             e.printStackTrace();
         } finally {
             DbUtils.closeQuietly(conn);
+        }
+
+        if (!hasFindTable) {
+            throw new RuntimeException("数据库中未找到指定表：" + SystemMemory.tableName);
         }
     }
 
