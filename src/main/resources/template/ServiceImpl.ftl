@@ -104,7 +104,7 @@ public class ${className} implements ${serviceInterfaceName} {
      * @date ${createDate}
      */
     @Override
-    List<${entityClassName}> likePage(${entityClassName} ${entityName}, int offset, int limit) {
+    public List<${entityClassName}> likePage(${entityClassName} ${entityName}, int offset, int limit) {
         return ${daoName}.likePage(${entityName} , new RowBounds(offset, limit));
     }
 
@@ -120,7 +120,7 @@ public class ${className} implements ${serviceInterfaceName} {
      * @date ${createDate}
      */
     @Override
-    List<${entityClassName}> like(${entityClassName} ${entityName}) {
+    public List<${entityClassName}> like(${entityClassName} ${entityName}) {
         return ${daoName}.like(${entityName});
     }
 
@@ -137,7 +137,7 @@ public class ${className} implements ${serviceInterfaceName} {
      * @date ${createDate}
      */
     @Override
-    int rows(${entityClassName} ${entityName}) {
+    public int rows(${entityClassName} ${entityName}) {
         return ${daoName}.rows(${entityName});
     }
 }
