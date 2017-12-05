@@ -70,7 +70,7 @@ public class ${className} implements ${serviceInterfaceName} {
      * @date ${createDate}
      */
     @Override
-    SystemParam selectByKey(@Param(value = "id") String id) {
+    ${entityClassName} selectByKey(@Param(value = "id") String id) {
         return ${daoName}.selectByKey(id);
     }
 
@@ -104,7 +104,7 @@ public class ${className} implements ${serviceInterfaceName} {
      * @date ${createDate}
      */
     @Override
-    List<SystemParam> likePage(${entityClassName} ${entityName}, int offset, int limit) {
+    List<${entityClassName}> likePage(${entityClassName} ${entityName}, int offset, int limit) {
         return ${daoName}.likePage(${entityName} , new RowBounds(offset, limit));
     }
 
@@ -120,7 +120,7 @@ public class ${className} implements ${serviceInterfaceName} {
      * @date ${createDate}
      */
     @Override
-    List<SystemParam> like(${entityClassName} ${entityName}) {
+    List<${entityClassName}> like(${entityClassName} ${entityName}) {
         return ${daoName}.like(${entityName});
     }
 

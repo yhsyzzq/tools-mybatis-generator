@@ -63,7 +63,7 @@ public interface ${className} {
      *
      * @date ${createDate}
      */
-    SystemParam selectByKey(@Param(value = "id") String id);
+    ${entityClassName} selectByKey(@Param(value = "id") String id);
 
     /**
      * <p>
@@ -80,7 +80,7 @@ public interface ${className} {
      *
      * @date ${createDate}
      */
-    List<SystemParam> likePage(${entityClassName} ${entityName}, int offset, int limit);
+    List<${entityClassName}> likePage(${entityClassName} ${entityName}, int offset, int limit);
 
     /**
      * <p>
@@ -93,7 +93,7 @@ public interface ${className} {
      *
      * @date ${createDate}
      */
-    List<SystemParam> like(${entityClassName} ${entityName});
+    List<${entityClassName}> like(${entityClassName} ${entityName});
 
 
     /**

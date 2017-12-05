@@ -48,7 +48,7 @@ public interface ${className} {
      * @return
      * @date ${createDate}
      */
-    SystemParam selectByKey(@Param(value = "id") String id);
+    ${entityClassName} selectByKey(@Param(value = "id") String id);
 	
     /**
      * 模糊匹配，分页查询${description}记录列表
