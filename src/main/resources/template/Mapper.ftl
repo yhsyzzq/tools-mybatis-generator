@@ -37,9 +37,7 @@
 	<!-- 根据主键修改数据持久化对象 -->
 	<update id="updateByKey" parameterType="${entityFullName}">
 		UPDATE ${tableName}
-		<set>
 			${updateColumnStr}
-		</set>
 		<where>
 			<if test="id != null and id != ''">
 				ID = <#noparse>#{id}</#noparse>
