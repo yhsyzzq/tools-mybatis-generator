@@ -132,7 +132,7 @@ public class GeneratorHandler {
         entityInfo.setAuthor(SystemMemory.author);  //作者
         entityInfo.setFieldList(SystemMemory.columnList); //实体类属性集合
         entityInfo.setPackageName(SystemMemory.packageName + ".entity"); //实体类包名
-        entityInfo.setFilePath(SystemMemory.generatorFileDir + "/entity/" + SystemMemory.entityName + Constant.ENTITY_SUFFIX + ".java"); //实体类文件路径
+        entityInfo.setFilePath(SystemMemory.generatorFileDir + "/entity/" + SystemMemory.entityName + ".java"); //实体类文件路径
         entityInfo.setTemplateFilePath(Constant.TEMPLATE_FILE_PATH + Constant.ENTITY_SUFFIX + ".ftl"); //实体类模板文件路径
         entityInfo.setCreateDate(Utils.getNowDateStr());//创建时间
 
@@ -197,7 +197,7 @@ public class GeneratorHandler {
         mapperInfo.setEntityFullName(entityFullName); //实体类全名
         mapperInfo.setNamespace(namespace); //命名空间
         mapperInfo.setEntityResultMap(SystemMemory.entityName + Constant.MAPPER_RESULTMAP); //mapper映射结果集
-        mapperInfo.setFilePath(SystemMemory.generatorFileDir + "/ibatis/" + SystemMemory.entityName + "Dao" + Constant.MAPPER_SUFFIX + ".xml"); //mapper文件路径
+        mapperInfo.setFilePath(SystemMemory.generatorFileDir + "/ibatis/" + "I" + SystemMemory.entityName + "Dao" + Constant.MAPPER_SUFFIX + ".xml"); //mapper文件路径
         mapperInfo.setTemplateFilePath(Constant.TEMPLATE_FILE_PATH + Constant.MAPPER_SUFFIX + ".ftl"); //mapper模板文件路径
 
         //构建import字符串,field属性字符串

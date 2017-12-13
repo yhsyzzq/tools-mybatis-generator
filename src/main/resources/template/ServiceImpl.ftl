@@ -3,7 +3,7 @@ package ${packageName};
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import org.apache.ibatis.annotations.Param;
 import java.util.List;
 ${importStr}
 
@@ -70,7 +70,7 @@ public class ${className} implements ${serviceInterfaceName} {
      * @date ${createDate}
      */
     @Override
-    ${entityClassName} selectByKey(@Param(value = "id") String id) {
+    public ${entityClassName} selectByKey(@Param(value = "id") String id) {
         return ${daoName}.selectByKey(id);
     }
 
