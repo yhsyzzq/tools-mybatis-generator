@@ -89,8 +89,8 @@ public class GeneratorHandler {
                     ResultSet columnRS = dbMetaData.getColumns(null, schemaPattern, tableName, "%");
                     while (columnRS.next()) {
                         String columnName = columnRS.getString("COLUMN_NAME"); //列名称
-                        String typeName = columnRS.getString("TYPE_NAME"); //列数据类型
                         int jdbcType = Integer.valueOf(columnRS.getString("DATA_TYPE")); //列jdbc类型
+                        String typeName = Utils.getJdbcTypeName(jdbcType); //列数据类型
                         String entityFieldName = Utils.getEntityFieldName(columnName);
                         String entityFieldType = Utils.getJavaType(jdbcType);
                         String simpleEntityFieldType = Utils.getSimpleTypeName(entityFieldType);

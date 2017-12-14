@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Time;
@@ -85,6 +86,33 @@ public class Utils {
             default:
                 return null;
         }
+    }
+
+    /**
+     * 根据jdbc类型编码获取jdbc类型名称
+     *
+     * @param jdbcTypeCode
+     * @return
+     */
+    public static String getJdbcTypeName(int jdbcTypeCode) {
+        String jdbcTypeName = "";
+        Field[] fields = Types.class.getDeclaredFields();
+        try {
+            for (Field field : fields) {
+                if (field.getInt(new Object()) == jdbcTypeCode) {
+                    jdbcTypeName = field.getName();
+                    break;
+                }
+
+            }
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return jdbcTypeName;
+    }
+
+    public static void main(String[] args) {
+        Utils.getJdbcTypeName(1);
     }
 
     /**
