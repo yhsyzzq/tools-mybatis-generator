@@ -95,24 +95,17 @@ public class Utils {
      * @return
      */
     public static String getJdbcTypeName(int jdbcTypeCode) {
-        String jdbcTypeName = "";
         Field[] fields = Types.class.getDeclaredFields();
         try {
             for (Field field : fields) {
                 if (field.getInt(new Object()) == jdbcTypeCode) {
-                    jdbcTypeName = field.getName();
-                    break;
+                    return field.getName();
                 }
-
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        return jdbcTypeName;
-    }
-
-    public static void main(String[] args) {
-        Utils.getJdbcTypeName(1);
+        return "";
     }
 
     /**
