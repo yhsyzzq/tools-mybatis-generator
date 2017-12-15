@@ -196,7 +196,7 @@ public class GeneratorHandler {
         mapperInfo.setTableName(SystemMemory.tableName); //表名称
         mapperInfo.setEntityFullName(entityFullName); //实体类全名
         mapperInfo.setNamespace(namespace); //命名空间
-        mapperInfo.setEntityResultMap(SystemMemory.entityName + Constant.MAPPER_RESULTMAP); //mapper映射结果集
+        mapperInfo.setEntityResultMap(Utils.toFirstLowerCase(SystemMemory.entityName) + Constant.MAPPER_RESULTMAP); //mapper映射结果集
         mapperInfo.setFilePath(SystemMemory.generatorFileDir + "/ibatis/" + "I" + SystemMemory.entityName + "Dao" + Constant.MAPPER_SUFFIX + ".xml"); //mapper文件路径
         mapperInfo.setTemplateFilePath(Constant.TEMPLATE_FILE_PATH + Constant.MAPPER_SUFFIX + ".ftl"); //mapper模板文件路径
 
